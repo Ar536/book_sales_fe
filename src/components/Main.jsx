@@ -1,4 +1,5 @@
-import Button from './Button'
+
+
 
 export default function Main(props){
     const {tech, btn} = props;
