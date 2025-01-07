@@ -3,6 +3,10 @@ import Footer from './components/shared/Footer/index.jsx';
 import Hero from './components/shared/Hero/index.jsx';
 import Navbar from './components/shared/Navbar/index.jsx';
 import Team from './components/shared/Team/index.jsx';
+import Login from './pages/auth/login/index.jsx';
+import Register from './pages/auth/register/index.jsx';
+import Author from './pages/author/index.jsx';
+import Genres from './pages/Genre/index.jsx';
 
 
 function Home() { {/*Home adalah parent*/}
@@ -11,9 +15,13 @@ function Home() { {/*Home adalah parent*/}
             {/* <Header/>
             <Main tech="Laravel" btn="Belajar React"/>  bisa dianggap elemen ketig tiganya dan tiga tiganya adalah child */}
             <Navbar/>
-            <Hero/>
+            {/* <Login/>
+            <Register/> */}
+            <Author/>
+            <Genres/>
+            {/* <Hero/>
             <Team />
-            <Contact btn="send"/>
+            <Contact btn="send"/> */}
             <Footer /> 
         </>
     );
