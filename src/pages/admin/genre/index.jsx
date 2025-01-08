@@ -1,4 +1,4 @@
-import genres from "../../utils/constants/genres";
+import genres from "../../../utils/constants/genres";
 
 export default function Genres() {
     
