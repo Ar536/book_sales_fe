@@ -1,9 +1,7 @@
-import AdminLayout from "../../layout/admin";
-
 export default function Dashboard() {
-    return(
-        <>
-            <AdminLayout/>
-        </>
-    )
+  return (
+    <>
+      <h1>Selamat Datang!</h1>
+    </>
+  )
 }
