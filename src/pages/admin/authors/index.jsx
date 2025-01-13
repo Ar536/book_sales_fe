@@ -1,20 +1,20 @@
 import { Link } from "react-router-dom";
-import { getBooks } from "../../../services/books";
 import { useEffect, useState } from "react";
+import { getAuthors } from "../../../services/authors";
 
 
-export default function Books() {
-   const[books, setBooks] = useState([])
+export default function Authors() {
+   const[authors, setAuthors] = useState([])
 
     useEffect(() => {
-        const fetchBooks = async () =>{
-            const data = await getBooks()
-            setBooks(data)
+        const fetchAuthors = async () =>{
+            const data = await getAuthors()
+            setAuthors(data)
         }
-        fetchBooks()
+        fetchAuthors()
     }, [])
     
-    console.log(books)
+    console.log(authors)
     return (
         <div
         className="rounded-sm shadow-default dark:bg-boxdark sm:px-7.5 xl:pb-1"
@@ -27,26 +27,17 @@ export default function Books() {
                 <th
                     className="min-w-[220px] px-4 py-4 font-medium text-black dark:text-white xl:pl-11"
                 >
-                    Judul
+                    Nama
                 </th>
                 <th
                     className="min-w-[150px] px-4 py-4 font-medium text-black dark:text-white"
                 >
-                    Deskripsi
+                    Foto
                 </th>
                 <th
                     className="min-w-[120px] px-4 py-4 font-medium text-black dark:text-white"
                 >
-                    Stok
-                </th>
-                <th className="px-4 py-4 font-medium text-black dark:text-white">
-                    Cover Photo
-                </th>
-                <th className="px-4 py-4 font-medium text-black dark:text-white">
-                    Genre
-                </th>
-                <th className="px-4 py-4 font-medium text-black dark:text-white">
-                    Author
+                    Bio
                 </th>
                 <th className="px-4 py-4 font-medium text-black dark:text-white">
                     Action
@@ -55,33 +46,21 @@ export default function Books() {
             </thead>
             <tbody>
 
-                {books.length > 0 ?
-                books.map((book) => (
-                <tr  key={book.id} className="hover:bg-gray-50">
+                {authors.length > 0 ?
+                authors.map((author) => (
+                <tr  key={author.id} className="hover:bg-gray-50">
                     <td
                         className="px-4 py-5 pl-9 xl:pl-11"
                     >
-                        <h5 className="font-medium text-black dark:text-white">{book.title}</h5>
-                        <p className="text-sm">Rp{book.price}</p>
+                        <h5 className="font-medium text-black dark:text-white">{author.name}</h5>
                     </td>
                     <td className="px-4 py-5">
-                        <p className="text-black dark:text-white">{book.description}</p>
+                        <p className="text-black dark:text-white">{author.photo}</p>
                     </td>
                     <td className="px-4 py-5">
-                        <p className="text-black dark:text-white">{book.stock}</p>
+                        <p className="text-black dark:text-white">{author.bio}</p>
                     </td>
-                    <td className="px-4 py-5">
-                        {/* <p className="text-black dark:text-white">{book.cover_photo}</p> */}
-                        <img src="https://img.freepik.com/premium-photo/man-wearing-white-suit-with-mask_101266-27717.jpg" alt="" />
-                    </td>
-                    <td className="px-4 py-5">
-                        <p className="text-black dark:text-white">{book.genre_id}</p>
-                    </td>
-                    <td className="px-4 py-5">
-                        <p className="text-black dark:text-white">{book.author_id}</p>
-                    </td>
-                    
-                    <td className="px-4 py-5">
+                     <td className="px-4 py-5">
                         <div className="flex items-center space-x-3.5">
                         <Link to="/admin/books/edit"><i className="fa-solid fa-pen-to-square"></i></Link>
                         <button>
