@@ -1,25 +1,35 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getPmethods } from "../../../services/payment_methods";
+import { deletePmethod, getPmethods } from "../../../services/payment_methods";
 
 
 export default function Books() {
    const[pmethods, setPmethods] = useState([])
 
     useEffect(() => {
-        const fetchBooks = async () =>{
+        const fetchPmethods = async () =>{
             const data = await getPmethods()
             setPmethods(data)
         }
-        fetchBooks()
+        fetchPmethods()
     }, [])
+
+    const handleDelete = async (id) => {
+        const confirmedDelete = window.confirm("Apakah Anda yakin ingin menghapus data ini")
+    
+        if (confirmedDelete){
+            await deletePmethod(id)
+            setPmethods(pmethods.filter(pmethod => pmethod.id !==id))
+            }
+        }
+        
     
     console.log(pmethods)
     return (
         <div
         className="rounded-sm shadow-default dark:bg-boxdark sm:px-7.5 xl:pb-1"
         >
-       
+        <Link to={"/admin/payment_methods/create"} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Tambah data</Link>
         <div className="max-w-full overflow-x-auto">
             <table className="w-full table-auto">
             <thead className="border-b bg-gray-50 text-white">
@@ -37,7 +47,7 @@ export default function Books() {
                 <th
                     className="min-w-[120px] px-4 py-4 font-medium text-black dark:text-white"
                 >
-                    Methode Bayar
+                    Image
                 </th>
                 <th className="px-4 py-4 font-medium text-black dark:text-white">
                     Action
@@ -62,8 +72,8 @@ export default function Books() {
                     </td>
                     <td className="px-4 py-5">
                         <div className="flex items-center space-x-3.5">
-                        <Link to="/admin/books/edit"><i className="fa-solid fa-pen-to-square"></i></Link>
-                        <button>
+                        <Link to={`/admin/payment_methods/edit/${pmethod.id}`}><i className="fa-solid fa-pen-to-square"></i></Link>
+                        <button onClick={()=> handleDelete(pmethod.id)}>
                             <i className="fa-solid fa-trash"></i>
                         </button>
                         </div>

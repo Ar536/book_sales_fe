@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import { getGenres } from "../../../services/genre"
+import { deleteGenre, getGenres } from "../../../services/genre"
 import { useEffect, useState } from "react"
 
 export default function Genres() {
@@ -12,6 +12,15 @@ export default function Genres() {
          }
          fetchGenres()
      }, [])
+
+        const handleDelete = async (id) => {
+            const confirmedDelete = window.confirm("Apakah Anda yakin ingin menghapus data ini")
+     
+            if (confirmedDelete){
+                await deleteGenre(id)
+                setGenres(genres.filter(genre => genre.id !==id))
+            }
+        }
      
      console.log(genres)
      return (
@@ -19,6 +28,7 @@ export default function Genres() {
          className="rounded-sm shadow-default dark:bg-boxdark sm:px-7.5 xl:pb-1"
          >
         
+        <Link to={"/admin/genres/create"} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Tambah data</Link>
          <div className="max-w-full overflow-x-auto">
              <table className="w-full table-auto">
              <thead className="border-b bg-gray-50 text-white">
@@ -26,7 +36,7 @@ export default function Genres() {
                  <th
                      className="min-w-[220px] px-4 py-4 font-medium text-black dark:text-white xl:pl-11"
                  >
-                     genre
+                     Name
                  </th>
                  <th
                      className="min-w-[150px] px-4 py-4 font-medium text-black dark:text-white"
@@ -53,8 +63,8 @@ export default function Genres() {
                      </td>
                     <td className="px-4 py-5">
                          <div className="flex items-center space-x-3.5">
-                         <Link to="/admin/books/edit"><i className="fa-solid fa-pen-to-square"></i></Link>
-                         <button>
+                            <Link to={`/admin/genres/edit/${genre.id}`}><i className="fa-solid fa-pen-to-square"></i></Link>
+                         <button onClick={()=> handleDelete(genre.id)}>
                              <i className="fa-solid fa-trash"></i>
                          </button>
                          </div>

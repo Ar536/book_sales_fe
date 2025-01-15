@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getAuthors } from "../../../services/authors";
+import { deleteAuthor, getAuthors } from "../../../services/authors";
 
 
 export default function Authors() {
@@ -13,13 +13,22 @@ export default function Authors() {
         }
         fetchAuthors()
     }, [])
+
+    const handleDelete = async (id) => {
+                const confirmedDelete = window.confirm("Apakah Anda yakin ingin menghapus data ini")
+         
+            if (confirmedDelete){
+                await deleteAuthor(id)
+                setAuthors(authors.filter(author => author.id !==id))
+            }
+    }
     
     console.log(authors)
     return (
         <div
         className="rounded-sm shadow-default dark:bg-boxdark sm:px-7.5 xl:pb-1"
         >
-       
+       <Link to={"/admin/authors/create"} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Tambah data</Link>
         <div className="max-w-full overflow-x-auto">
             <table className="w-full table-auto">
             <thead className="border-b bg-gray-50 text-white">
@@ -55,15 +64,16 @@ export default function Authors() {
                         <h5 className="font-medium text-black dark:text-white">{author.name}</h5>
                     </td>
                     <td className="px-4 py-5">
-                        <p className="text-black dark:text-white">{author.photo}</p>
+                        {/* <p className="text-black dark:text-white">{author.photo}</p> */}
+                        <img src={"http://127.0.0.1:8000/storage/authors/" + author.photo} alt="" />
                     </td>
                     <td className="px-4 py-5">
                         <p className="text-black dark:text-white">{author.bio}</p>
                     </td>
                      <td className="px-4 py-5">
                         <div className="flex items-center space-x-3.5">
-                        <Link to="/admin/books/edit"><i className="fa-solid fa-pen-to-square"></i></Link>
-                        <button>
+                        <Link to={`/admin/authors/edit/${author.id}`}><i className="fa-solid fa-pen-to-square"></i></Link>
+                        <button  onClick={()=> handleDelete(author.id)}>
                             <i className="fa-solid fa-trash"></i>
                         </button>
                         </div>
