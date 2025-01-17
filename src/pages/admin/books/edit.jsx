@@ -9,6 +9,7 @@ export default function BookEdit() {
     const[genres, setGenres] = useState([]) 
     const[authors, setAuthors] = useState([])
 
+    //state utk menampung data
     const [image, setImage] = useState(); //ush
     const [title, setTitle] = useState(); //ush
     const [description, setDescription] = useState();

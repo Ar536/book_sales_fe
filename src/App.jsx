@@ -20,6 +20,7 @@ import AuthorCreate from "./pages/admin/authors/create.jsx"
 import AuthorEdit from "./pages/admin/authors/edit.jsx"
 import PmethodCreate from "./pages/admin/payment_methods/create.jsx"
 import Pmethodedit from "./pages/admin/payment_methods/edit.jsx"
+import BookDetail from "./pages/auth/login/detail.jsx"
 
 
 
@@ -35,6 +36,7 @@ function App() {
             <Route element={<PublicLayout/>}>
                 <Route index element={<Home/>} />
                 <Route path="books" element={<PublicBooks/>} />
+                <Route path="books/:id" element={<BookDetail/>} />
                 <Route path="teams" element={<Team/>} />
                 <Route path="contacts" element={<Contact/>} />
             </Route>
@@ -43,7 +45,7 @@ function App() {
             <Route path="/login" element={<Login/>}/>
             <Route path="/register" element={<Register/>}/>
 
-            {/* admin Route */}
+            {/* Admin Route */}
             <Route path="admin"element={<AdminLayout/>}>
                 <Route index element={<Dashboard/>} />
                 <Route path="genres" >

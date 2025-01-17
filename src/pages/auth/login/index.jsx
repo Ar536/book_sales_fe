@@ -24,7 +24,7 @@ export default function Login() {
 
        const res = await login({email, password})
 
-       console.log(res)
+    //    console.log(res)
 
        //cek role & redirect
        if (res.user.role === "admin" || res.user.role === "staff") {
