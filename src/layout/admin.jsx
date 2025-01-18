@@ -294,6 +294,18 @@ export default function AdminLayout() {
                             </Link>
                         </li>
 
+                        {userInfo.role === "admin" && (
+                            <li>
+                            <Link
+                                to="admin/users"
+                                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                            >
+                                <i className="fa-solid fa-circle-user fa-lg"></i>
+                                <span className="flex-1 ms-3 whitespace-nowrap">Users</span>
+                            </Link>
+                            </li>
+                            )}
+
                         <li>
                             <button
                                 onClick={handleLogout}
